@@ -1,9 +1,11 @@
-package isomora.com.greendoctor
+package isomora.com.greendoctor.UI
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import isomora.com.greendoctor.MainActivity
+import isomora.com.greendoctor.R
 
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,7 +14,7 @@ class SplashScreen : AppCompatActivity() {
 
         Handler().postDelayed({
             kotlin.run {
-                startActivity(Intent(this,MainActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         },4000)

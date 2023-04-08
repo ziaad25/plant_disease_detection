@@ -13,10 +13,14 @@ import android.provider.MediaStore
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Gravity
+import androidx.fragment.app.Fragment
+import isomora.com.greendoctor.UI.CameraFragment
+import isomora.com.greendoctor.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*;
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
+    val fragmentCamera = CameraFragment()
     private lateinit var mClassifier: Classifier
     private lateinit var mBitmap: Bitmap
 
@@ -28,72 +32,105 @@ class MainActivity : AppCompatActivity() {
     private val mLabelPath = "plant_labels.txt"
     private val mSamplePath = "soybean.JPG"
 
+    lateinit var bindin: ActivityMainBinding
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-        setContentView(R.layout.activity_main)
+        bindin = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(bindin.root)
         mClassifier = Classifier(assets, mModelPath, mLabelPath, mInputSize)
 
-        resources.assets.open(mSamplePath).use {
-            mBitmap = BitmapFactory.decodeStream(it)
-            mBitmap = Bitmap.createScaledBitmap(mBitmap, mInputSize, mInputSize, true)
-            mPhotoImageView.setImageBitmap(mBitmap)
-        }
 
-        mCameraButton.setOnClickListener {
-            val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(callCameraIntent, mCameraRequestCode)
-        }
+        addNavigationListener()
 
-        mGalleryButton.setOnClickListener {
-            val callGalleryIntent = Intent(Intent.ACTION_PICK)
-            callGalleryIntent.type = "image/*"
-            startActivityForResult(callGalleryIntent, mGalleryRequestCode)
-        }
-        mDetectButton.setOnClickListener {
-                val results = mClassifier.recognizeImage(mBitmap).firstOrNull()
-                mResultTextView.text= results?.title+"\n Confidence:"+results?.confidence
+//        resources.assets.open(mSamplePath).use {
+//            mBitmap = BitmapFactory.decodeStream(it)
+//            mBitmap = Bitmap.createScaledBitmap(mBitmap, mInputSize, mInputSize, true)
+//            mPhotoImageView.setImageBitmap(mBitmap)
+//        }
+//
+//        mCameraButton.setOnClickListener {
+//            val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//            startActivityForResult(callCameraIntent, mCameraRequestCode)
+//        }
+//
+//        mGalleryButton.setOnClickListener {
+//            val callGalleryIntent = Intent(Intent.ACTION_PICK)
+//            callGalleryIntent.type = "image/*"
+//            startActivityForResult(callGalleryIntent, mGalleryRequestCode)
+//        }
+//        mDetectButton.setOnClickListener {
+//            val results = mClassifier.recognizeImage(mBitmap).firstOrNull()
+//            mResultTextView.text = results?.title + "\n Confidence:" + results?.confidence
+//
+//        }
 
-        }
+
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == mCameraRequestCode){
-            //Considérons le cas de la caméra annulée
-            if(resultCode == Activity.RESULT_OK && data != null) {
-                mBitmap = data.extras!!.get("data") as Bitmap
-                mBitmap = scaleImage(mBitmap)
-                val toast = Toast.makeText(this, ("Image crop to: w= ${mBitmap.width} h= ${mBitmap.height}"), Toast.LENGTH_LONG)
-                toast.setGravity(Gravity.BOTTOM, 0, 20)
-                toast.show()
-                mPhotoImageView.setImageBitmap(mBitmap)
-                mResultTextView.text= "Your photo image set now."
-            } else {
-                Toast.makeText(this, "Camera cancel..", Toast.LENGTH_LONG).show()
-            }
-        } else if(requestCode == mGalleryRequestCode) {
-            if (data != null) {
-                val uri = data.data
 
-                try {
-                    mBitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
-                } catch (e: IOException) {
-                    e.printStackTrace()
+    fun addNavigationListener() {
+        bindin.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.Camera -> {
+                    addFragment(fragmentCamera)
+                    true
                 }
 
-                println("Success!!!")
-                mBitmap = scaleImage(mBitmap)
-                mPhotoImageView.setImageBitmap(mBitmap)
-
+                else -> {
+                    true
+                }
             }
-        } else {
-            Toast.makeText(this, "Unrecognized request code", Toast.LENGTH_LONG).show()
-
         }
     }
+
+    fun addFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragment_container, fragment)
+            commit()
+        }
+    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == mCameraRequestCode) {
+//            //Considérons le cas de la caméra annulée
+//            if (resultCode == Activity.RESULT_OK && data != null) {
+//                mBitmap = data.extras!!.get("data") as Bitmap
+//                mBitmap = scaleImage(mBitmap)
+//                val toast = Toast.makeText(
+//                    this,
+//                    ("Image crop to: w= ${mBitmap.width} h= ${mBitmap.height}"),
+//                    Toast.LENGTH_LONG
+//                )
+//                toast.setGravity(Gravity.BOTTOM, 0, 20)
+//                toast.show()
+//                mPhotoImageView.setImageBitmap(mBitmap)
+//                mResultTextView.text = "Your photo image set now."
+//            } else {
+//                Toast.makeText(this, "Camera cancel..", Toast.LENGTH_LONG).show()
+//            }
+//        } else if (requestCode == mGalleryRequestCode) {
+//            if (data != null) {
+//                val uri = data.data
+//
+//                try {
+//                    mBitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+//                } catch (e: IOException) {
+//                    e.printStackTrace()
+//                }
+//
+//                println("Success!!!")
+//                mBitmap = scaleImage(mBitmap)
+//                mPhotoImageView.setImageBitmap(mBitmap)
+//
+//            }
+//        } else {
+//            Toast.makeText(this, "Unrecognized request code", Toast.LENGTH_LONG).show()
+//
+//        }
+//    }
 
 
     fun scaleImage(bitmap: Bitmap?): Bitmap {

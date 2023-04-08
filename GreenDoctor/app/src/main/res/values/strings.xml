@@ -5,4 +5,5 @@
     <string name="buttonDiagnose">Detect</string>
     <string name="defaultImage">Default image set now...</string>
     <string name="descriptionImage">View for displaying image</string>
+    <string name="Camera">Camera</string>
 </resources>
