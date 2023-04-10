@@ -11,4 +11,52 @@
     <style name="image">
         <item name="cornerSize">25dp</item>
     </style>
+
+    <style name="WelcomeText" parent="TextTitle">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="SignUpText" parent="TextSubHint">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="TextTitle">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/font_size_18</item>
+    </style>
+
+    <style name="TextSubTitle">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/font_size_16</item>
+    </style>
+
+    <style name="TextDetails">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/font_size_14</item>
+    </style>
+
+    <style name="TextSubDetails">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/font_size_14</item>
+    </style>
+
+    <style name="TextHint">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/font_size_12</item>
+    </style>
+
+    <style name="TextSubHint">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textSize">@dimen/font_size_12</item>
+    </style>
+
+
+    <style name="SignUpDetailsText" parent="TextSubHint">
+        <item name="android:textColor">@color/black_details</item>
+    </style>
+
+    <style name="HaveAnAccountText" parent="TextSubHint">
+        <item name="android:textColor">@color/black_hint</item>
+    </style>
+
 </resources>

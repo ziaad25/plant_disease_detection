@@ -1,4 +1,4 @@
-package isomora.com.greendoctor.UI
+package isomora.com.greendoctor.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -14,9 +14,9 @@ class SplashScreen : AppCompatActivity() {
 
         Handler().postDelayed({
             kotlin.run {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
-        },4000)
+        }, 4000)
     }
 }

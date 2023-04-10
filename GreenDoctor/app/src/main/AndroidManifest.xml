@@ -13,9 +13,15 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
+                android:name=".ui.SignUpActivity"
+                android:exported="false" />
+        <activity
+                android:name=".ui.LoginActivity"
+                android:exported="false" />
+        <activity
                 android:name=".MainActivity"
                 android:exported="false" />
-        <activity android:name=".UI.SplashScreen">
+        <activity android:name=".ui.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
