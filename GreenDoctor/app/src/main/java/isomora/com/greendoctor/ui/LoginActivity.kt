@@ -19,5 +19,11 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        bindin.textViewForgetPassword.setOnClickListener {
+            var intent = Intent(this, ForgetPasswordActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }

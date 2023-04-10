@@ -13,6 +13,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
+                android:name=".ui.ForgetPasswordActivity"
+                android:exported="false" />
+        <activity
                 android:name=".ui.SignUpActivity"
                 android:exported="false" />
         <activity
