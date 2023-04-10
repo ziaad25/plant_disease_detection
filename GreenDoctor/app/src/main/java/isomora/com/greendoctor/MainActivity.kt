@@ -74,15 +74,5 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun scaleImage(bitmap: Bitmap?): Bitmap {
-        val orignalWidth = bitmap!!.width
-        val originalHeight = bitmap.height
-        val scaleWidth = mInputSize.toFloat() / orignalWidth
-        val scaleHeight = mInputSize.toFloat() / originalHeight
-        val matrix = Matrix()
-        matrix.postScale(scaleWidth, scaleHeight)
-        return Bitmap.createBitmap(bitmap, 0, 0, orignalWidth, originalHeight, matrix, true)
-    }
-
 }
 
