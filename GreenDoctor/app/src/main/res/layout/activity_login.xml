@@ -30,18 +30,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_user_name_login"
+            android:id="@+id/text_input_email_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:layout_marginHorizontal="@dimen/margin_medium_16"
             android:layout_marginTop="@dimen/margin_large_24"
-            android:hint="@string/username"
+            android:hint="@string/Email"
             android:textColorHint="#7A000000"
             app:layout_constraintTop_toBottomOf="@+id/text_view_welcome_login">
 
         <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_text_user_name_login"
+                android:id="@+id/edit_text_email_login"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:background="@drawable/shape_user_name_and_password"
@@ -58,8 +58,8 @@
             android:hint="@string/password"
             android:textColorHint="#7A000000"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/text_input_user_name_login"
-            app:layout_constraintTop_toBottomOf="@id/text_input_user_name_login"
+            app:layout_constraintStart_toStartOf="@id/text_input_email_login"
+            app:layout_constraintTop_toBottomOf="@id/text_input_email_login"
             app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -110,6 +110,15 @@
                 tools:layout_editor_absoluteX="349dp" />
 
     </LinearLayout>
+
+    <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_large_24"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <TextView
             android:id="@+id/text_view_forget_password"
