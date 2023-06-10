@@ -42,12 +42,15 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>() {
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.Camera)
     }
 
+    override fun menuLogout() {
+        TODO("Not yet implemented")
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         setUp()
         addCallBacks()
-
         super.onViewCreated(view, savedInstanceState)
 
     }
@@ -66,7 +69,15 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>() {
         binding.mDetectButton.setOnClickListener {
             val results = mClassifier.recognizeImage(mBitmap).firstOrNull()
             binding.mResultTextView.text = results?.title + "\n Confidence:" + results?.confidence
-
+            if (results!!.title[0] == 't')
+                binding.textViewNamePlant.text = "tomato"
+            else if (results.title[0] == 's' && results.title[1] == 't') {
+                binding.textViewNamePlant.text = "strawberry"
+            } else if (results.title[0] == 's' && results.title[1] == 'q') {
+                binding.textViewNamePlant.text = "squash"
+            } else if (results.title[0] == 's' ) {
+                binding.textViewNamePlant.text = "soybean"
+            }
         }
     }
 

@@ -44,16 +44,11 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         }
     }
 
-   /* fun <T : Parcelable> createArgument(value: T, fragment: Fragment) =
-        fragment.apply {
-            arguments = Bundle().apply {
-                putParcelable(Constants.Keys.ARGUMENT, value)
-            }
-        }*/
-
     abstract fun hasBackButtonOrNot()
 
     abstract fun setActionBarTitle()
+
+    abstract fun menuLogout()
 
 
 }

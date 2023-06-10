@@ -13,25 +13,25 @@ import android.provider.MediaStore
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Gravity
+import android.view.Menu
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
 import isomora.com.greendoctor.databinding.ActivityMainBinding
 import isomora.com.greendoctor.fragment.CameraFragment
 import isomora.com.greendoctor.fragment.HomeFragment
+import isomora.com.greendoctor.ui.LoginActivity
 import kotlinx.android.synthetic.main.activity_main.*;
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
     val fragmentCamera = CameraFragment()
-    private lateinit var mClassifier: Classifier
-    private lateinit var mBitmap: Bitmap
 
-    private val mCameraRequestCode = 0
-    private val mGalleryRequestCode = 2
-
-    private val mInputSize = 224
-    private val mModelPath = "plant_disease_model.tflite"
-    private val mLabelPath = "plant_labels.txt"
-    private val mSamplePath = "soybean.JPG"
+    var mAuth: FirebaseAuth? = null
+    var mUser: FirebaseUser? = null
+    var mStore: FirebaseFirestore? = null
 
     lateinit var bindin: ActivityMainBinding
 
@@ -41,16 +41,17 @@ class MainActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         bindin = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bindin.root)
-        mClassifier = Classifier(assets, mModelPath, mLabelPath, mInputSize)
 
+        mAuth = FirebaseAuth.getInstance()
+        mUser = mAuth!!.currentUser
+        mStore = FirebaseFirestore.getInstance()
 
         addNavigationListener()
-
-
     }
 
 
-    fun addNavigationListener() {
+    private fun addNavigationListener() {
+        addFragment(HomeFragment())
         bindin.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.Camera -> {
@@ -64,6 +65,25 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_top_par, menu)
+        return true
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.log_out -> {
+                mAuth!!.signOut()
+                finish()
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+        }
+        return true
     }
 
     fun addFragment(fragment: Fragment) {

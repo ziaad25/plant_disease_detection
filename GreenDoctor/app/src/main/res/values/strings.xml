@@ -42,4 +42,12 @@
     <string name="no_internet_connection_title">No Internet Connection</string>
     <string name="no_internet_connection_message">Please check your internet connection and try again</string>
     <string name="retry">Retry</string>
+
+    <string name="food">"An introduction to the identification of plant diseases: Plant diseases can have a significant impact on crop yields and can affect the quality and safety of agricultural products. Early detection and identification of plant diseases is crucial to prevent their spread and minimize their impact on plant health and agricultural productivity."</string>
+    <string name="history_second_text">Here are some steps involved in the identification of plant diseases:Symptoms observation: The first step in identifying a plant disease is to observe the symptoms exhibited by the plant. Symptoms can include discoloration, wilting, lesions, or deformations. Identifying the specific symptoms can give a clue about the potential cause of the disease.
+Sample collection: Once the symptoms are identified, a sample of the plant should be collected for further analysis. It is important to collect a representative sample that includes both diseased and healthy tissue.
+Laboratory analysis: The collected sample is analyzed in a laboratory by trained professionals. A range of techniques can be used to identify the disease, including microscopy, serology, and molecular methods.
+Diagnosis: Based on the laboratory analysis, a diagnosis is made about the specific disease that is affecting the plant. This is important because different diseases require different treatments, and accurate diagnosis is critical for effective disease management.
+Disease management: Once the disease is identified, appropriate management strategies can be implemented to prevent its spread and minimize its impact on plant health. These strategies may include the use of fungicides, crop rotation, or genetic resistance.
+Overall, the identification of plant diseases is a complex process that requires a combination of observation, laboratory analysis, and experise. Accurate and timely identification is essential for effective disease management and ensuring the health and productivity of agricultural crops.</string>
 </resources>

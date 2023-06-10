@@ -18,4 +18,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun setActionBarTitle() {
         (activity as AppCompatActivity).supportActionBar?.title = "Home"
     }
+
+    override fun menuLogout() {
+        TODO("Not yet implemented")
+    }
+
+
 }
