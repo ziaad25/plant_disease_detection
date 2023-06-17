@@ -70,14 +70,35 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>() {
             val results = mClassifier.recognizeImage(mBitmap).firstOrNull()
             binding.mResultTextView.text = results?.title + "\n Confidence:" + results?.confidence
             if (results!!.title[0] == 't')
-                binding.textViewNamePlant.text = "tomato"
+                binding.textViewNamePlant.text = "Tomato"
             else if (results.title[0] == 's' && results.title[1] == 't') {
-                binding.textViewNamePlant.text = "strawberry"
+                binding.textViewNamePlant.text = "Strawberry"
             } else if (results.title[0] == 's' && results.title[1] == 'q') {
-                binding.textViewNamePlant.text = "squash"
-            } else if (results.title[0] == 's' ) {
-                binding.textViewNamePlant.text = "soybean"
+                binding.textViewNamePlant.text = "Squash"
+            } else if (results.title[0] == 's') {
+                binding.textViewNamePlant.text = "Soybean"
+            } else if (results.title[0] == 'p' && results.title[1] == 'e') {
+                binding.textViewNamePlant.text = "Pepper"
+            } else if (results.title[0] == 'p' && results.title[1] == 'o') {
+                binding.textViewNamePlant.text = "Potato"
+            } else if (results.title[0] == 'p') {
+                binding.textViewNamePlant.text = "Peach"
+            } else if (results.title[0] == 'o') {
+                binding.textViewNamePlant.text = "Orange"
+            } else if (results.title[0] == 'g') {
+                binding.textViewNamePlant.text = "Grape"
+            } else if (results.title[0] == 'c' && results.title[1] == 'o') {
+                binding.textViewNamePlant.text = "Corn"
+            } else if (results.title[0] == 'c') {
+                binding.textViewNamePlant.text = "Cherry"
+            } else if (results.title[0] == 'a') {
+                binding.textViewNamePlant.text = "Apple"
+            } else if (results.title[0] == 'b') {
+                binding.textViewNamePlant.text = "Blueberry"
+            } else if (results.title[0] == 'r') {
+                binding.textViewNamePlant.text = "Raspberry"
             }
+
         }
     }
 
@@ -88,7 +109,8 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>() {
             mPhotoImageView.setImageBitmap(mBitmap)
         }
         context?.assets.let {
-            mClassifier = Classifier(requireContext().assets, mModelPath, mLabelPath, mInputSize)
+            mClassifier =
+                Classifier(requireContext().assets, mModelPath, mLabelPath, mInputSize)
         }
 
     }
@@ -117,7 +139,8 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>() {
                 val uri = data.data
 
                 try {
-                    mBitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, uri)
+                    mBitmap =
+                        MediaStore.Images.Media.getBitmap(context?.contentResolver, uri)
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
@@ -128,7 +151,8 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>() {
 
             }
         } else {
-            Toast.makeText(context, "Unrecognized request code", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Unrecognized request code", Toast.LENGTH_LONG)
+                .show()
 
         }
     }
@@ -140,6 +164,14 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>() {
         val scaleHeight = mInputSize.toFloat() / originalHeight
         val matrix = Matrix()
         matrix.postScale(scaleWidth, scaleHeight)
-        return Bitmap.createBitmap(bitmap, 0, 0, orignalWidth, originalHeight, matrix, true)
+        return Bitmap.createBitmap(
+            bitmap,
+            0,
+            0,
+            orignalWidth,
+            originalHeight,
+            matrix,
+            true
+        )
     }
 }
